@@ -2,7 +2,7 @@
 
 여러 SSH 서버를 순서대로 거쳐 마지막 Ubuntu 서버와 파일·폴더를 주고받는 내부 팀용 데스크톱 앱입니다. React/TypeScript 화면과 Tauri/Rust 전송 엔진으로 구성합니다.
 
-현재 v0.1 개발 MVP입니다. macOS Apple Silicon에서 앱 실행과 실제 제품 엔진의 Ubuntu 전송을 확인했습니다. Windows 코드와 패키지 빌드 구성을 포함하지만 Windows 실행 검증은 아직 하지 않았습니다.
+현재 v0.1 개발 MVP입니다. macOS Apple Silicon에서 앱 실행과 실제 제품 엔진의 Ubuntu 전송을 확인했습니다. Windows x64 설치 파일도 생성했고 Windows 환경의 단위 테스트 7개를 통과했습니다. [Windows 검증 패키지](https://github.com/DabangKim/RouteTransfer/actions/runs/35582150222/artifacts/10630932517)를 내려받아 설치할 수 있습니다. 회사 PC 설치·서버 연결 검증은 아직 남아 있습니다.
 
 ## 바로 실행
 
@@ -51,13 +51,13 @@ Windows 패키지 빌드:
 npm run tauri -- build --config src-tauri/tauri.windows.conf.json
 ```
 
-`.github/workflows/build.yml`은 수동 실행 시 macOS 앱 ZIP과 Windows NSIS 설치 파일을 Actions artifact로 생성합니다. 현재 저장소 업로드·Actions 실행·GitHub Release 게시를 수행하지 않았습니다. 생성한 로컬 앱은 배포용 Developer ID 서명·공증을 완료한 제품이 아닙니다.
+`.github/workflows/build.yml`은 수동 실행 시 macOS 앱 ZIP과 Windows NSIS 설치 파일을 Actions artifact로 생성합니다. 제품 소스와 Actions 구성은 [GitHub 저장소](https://github.com/DabangKim/RouteTransfer)에 업로드했습니다. Windows 빌드 결과는 Actions에서 확인합니다. GitHub Release 게시는 별도입니다. 생성한 로컬 앱은 배포용 Developer ID 서명·공증을 완료한 제품이 아닙니다.
 
 ## 검증 자료
 
 - [구현 및 검증 결과](RouteTransfer_Implementation_Status.md)
 - [실제 제품 엔진 통합 검사](tests/results/product-integration.json)
 - [화면 동작 검사](tests/results/ui.json)
-- [기존 기획 문서](RouteTransfer_MVP.md)
+- [Windows 검증 안내](WINDOWS_TEST_GUIDE.md)
 
 제품 데이터는 OS 앱 데이터 폴더의 `app.routetransfer.desktop`에 보관합니다. macOS는 `~/Library/Application Support/app.routetransfer.desktop`입니다. SQLite에는 프로필·전송 기록·신뢰한 서버 키를 저장하며, 저장을 선택한 비밀번호는 OS 보안 저장소에만 저장합니다. 기록은 자동 삭제하지 않습니다.

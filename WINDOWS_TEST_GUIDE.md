@@ -2,7 +2,7 @@
 
 ## 준비할 파일
 
-GitHub Actions의 **Build desktop packages** 실행 결과에서 **RouteTransfer-Windows** 압축 파일을 내려받고 압축을 풉니다.
+GitHub에 로그인한 뒤 [빌드 결과 페이지](https://github.com/DabangKim/RouteTransfer/actions/runs/35582150222)의 **Artifacts**에서 **RouteTransfer-Windows** 압축 파일을 내려받고 압축을 풉니다.
 
 - `RouteTransfer_…_x64-setup.exe`: Windows x64 설치 파일
 - `SHA256SUMS.txt`: 설치 파일 무결성 확인 값
@@ -11,7 +11,7 @@ GitHub Actions의 **Build desktop packages** 실행 결과에서 **RouteTransfer
 
 이 구성은 Windows x64 PC용입니다. ARM64 PC는 별도 지원 확인이 필요합니다. 회사 PC에는 Node.js, Rust, Python, Docker를 설치할 필요가 없습니다. WebView2 오프라인 설치 프로그램을 패키지에 포함하도록 구성했습니다. 회사의 프로그램 실행 정책에 따라 IT 승인이 필요할 수 있습니다. 테스트 패키지는 코드 서명 전 버전입니다.
 
-현재 로컬에는 Windows 설치 파일이 아직 생성되지 않았습니다. GitHub 저장소에 소스를 올리고 Windows 빌드가 성공해야 위 파일을 받을 수 있습니다.
+Windows 빌드와 7개 Rust 단위 테스트를 통과했습니다. [Windows 검증 패키지 다운로드](https://github.com/DabangKim/RouteTransfer/actions/runs/35582150222/artifacts/10630932517) · 설치 파일: `RouteTransfer_0.1.0_x64-setup.exe`. 회사 PC에서 실제 설치 및 서버 연결 검증은 다음 절차로 진행합니다.
 
 ## 설치와 첫 실행
 

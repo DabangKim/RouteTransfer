@@ -1,0 +1,13 @@
+{
+  "run_url": "https://github.com/DabangKim/RouteTransfer/actions/runs/35582150222",
+  "source_commit": "55a1c32225757f7de11fe8942a16c90c2f167aed",
+  "target": "x86_64-pc-windows-msvc",
+  "rust_tests_passed": 7,
+  "frontend_tests_passed": 2,
+  "installer": "RouteTransfer_0.1.0_x64-setup.exe",
+  "artifact_url": "https://github.com/DabangKim/RouteTransfer/actions/runs/35582150222/artifacts/10630932517",
+  "artifact_sha256": "a3b3147dc3e598fec2635391b0862c8e028562f47d61618188de98e4d572946b",
+  "build": "success",
+  "signed": false,
+  "company_pc_install_and_ssh_test": "not_performed"
+}
