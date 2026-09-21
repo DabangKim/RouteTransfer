@@ -1,0 +1,16 @@
+.venv-poc/
+__pycache__/
+.DS_Store
+poc/route.local.json
+poc/known_hosts.local
+.toolchains/
+poc/rust-connection/target/
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+.test-data/
+test-results/
+playwright-report/
+*.sqlite3*
+releases/

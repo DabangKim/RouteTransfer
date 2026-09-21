@@ -1,0 +1,16 @@
+Port 22
+ListenAddress 0.0.0.0
+HostKey /etc/ssh/ssh_host_ed25519_key
+PasswordAuthentication yes
+KbdInteractiveAuthentication no
+PubkeyAuthentication no
+PermitRootLogin no
+PermitEmptyPasswords no
+UsePAM no
+AllowUsers poc
+AllowTcpForwarding yes
+X11Forwarding no
+AllowAgentForwarding no
+Subsystem sftp internal-sftp
+PidFile /run/sshd.pid
+LogLevel ERROR

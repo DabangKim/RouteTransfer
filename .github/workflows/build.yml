@@ -1,0 +1,55 @@
+name: Build desktop packages
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            args: --bundles app
+            name: macOS
+          - os: windows-latest
+            args: --target x86_64-pc-windows-msvc --config src-tauri/tauri.windows.conf.json
+            name: Windows
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - run: npm ci
+      - run: npm test
+      # cargo tests expand the Tauri context and need frontendDist on a clean checkout.
+      - run: npm run build
+      - run: cargo test --locked --manifest-path src-tauri/Cargo.toml
+      - run: npm run tauri -- build ${{ matrix.args }}
+      - if: runner.os == 'macOS'
+        run: ditto -c -k --sequesterRsrc --keepParent src-tauri/target/release/bundle/macos/RouteTransfer.app RouteTransfer-macOS.zip
+      - if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $out = 'windows-test-package'
+          New-Item -ItemType Directory -Path $out | Out-Null
+          $installers = @(Get-ChildItem 'src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*-setup.exe')
+          if ($installers.Count -ne 1) { throw 'Expected one Windows installer' }
+          Copy-Item $installers[0].FullName $out
+          Copy-Item 'WINDOWS_TEST_GUIDE.md' $out
+          $hash = Get-FileHash $installers[0].FullName -Algorithm SHA256
+          "$($hash.Hash.ToLower())  $($installers[0].Name)" | Set-Content "$out/SHA256SUMS.txt" -Encoding utf8
+          @{ version = (Get-Content package.json | ConvertFrom-Json).version; commit = $env:GITHUB_SHA; target = 'x86_64-pc-windows-msvc'; webview2 = 'offlineInstaller'; signed = $false } | ConvertTo-Json | Set-Content "$out/build-info.json" -Encoding utf8
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RouteTransfer-${{ matrix.name }}
+          path: |
+            RouteTransfer-macOS.zip
+            windows-test-package/*
+          if-no-files-found: error

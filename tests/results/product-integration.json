@@ -1,0 +1,53 @@
+{
+  "scope": "Real product Core; macOS client and isolated Ubuntu 24.04/OpenSSH; synthetic fixtures up to 32 MiB. No Windows, company network or 100 GB benchmark.",
+  "tests": [
+    {
+      "hops": 1,
+      "bad_password_rejected": true,
+      "changed_host_key_blocked": true,
+      "completed_not_retried": true,
+      "password_not_in_database": true,
+      "roundtrip_sha256": true,
+      "empty_directories": true,
+      "skip": true,
+      "overwrite": true,
+      "source_change_blocked": true,
+      "process_restart_recovery": true,
+      "retry_from_zero": true,
+      "attempts": 2,
+      "no_intermediate_files": true
+    },
+    {
+      "hops": 2,
+      "bad_password_rejected": true,
+      "changed_host_key_blocked": true,
+      "completed_not_retried": true,
+      "password_not_in_database": true,
+      "roundtrip_sha256": true,
+      "empty_directories": true,
+      "skip": true,
+      "overwrite": true,
+      "source_change_blocked": true,
+      "process_restart_recovery": true,
+      "retry_from_zero": true,
+      "attempts": 2,
+      "no_intermediate_files": true
+    },
+    {
+      "hops": 4,
+      "bad_password_rejected": true,
+      "changed_host_key_blocked": true,
+      "completed_not_retried": true,
+      "password_not_in_database": true,
+      "roundtrip_sha256": true,
+      "empty_directories": true,
+      "skip": true,
+      "overwrite": true,
+      "source_change_blocked": true,
+      "process_restart_recovery": true,
+      "retry_from_zero": true,
+      "attempts": 2,
+      "no_intermediate_files": true
+    }
+  ]
+}

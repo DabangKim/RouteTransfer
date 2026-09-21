@@ -1,0 +1,15 @@
+{
+  "realRustBackend": true,
+  "profileCreateAndEdit": true,
+  "localBrowse": true,
+  "selection": true,
+  "disconnectedTransferDisabled": true,
+  "audit": true,
+  "screens": [
+    "connections",
+    "transfer",
+    "settings"
+  ],
+  "minimumWindowNoHorizontalOverflow": true,
+  "pageErrors": []
+}
